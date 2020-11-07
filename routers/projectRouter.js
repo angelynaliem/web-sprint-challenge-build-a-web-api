@@ -49,7 +49,19 @@ projectRouter.put("/:id", (req,res) => {
 })
 
 //DELETE
-
-
+projectRouter.delete("/:id", (req,res) => {
+    project.remove(req.params.id)
+    .then(count => {
+        if(count > 0) {
+                    res.status(200).json({ message: "The project has been deleted ", removedProject: req.params.id }) //How to add the details of item being removed? Add Req.body variable?
+                  } else {
+                    res.status(404).json({ message: "The project cannot be deleted" })
+                  }
+    })
+    .catch(error => {
+              console.log("Error deleting specified project ", error)
+              res.status(500).json({ errorMessage: "Error processing DELETE specified project" })
+            })
+})
 
 module.exports = projectRouter
