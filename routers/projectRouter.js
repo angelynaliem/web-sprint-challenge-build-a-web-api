@@ -3,6 +3,7 @@ const express = require("express")
 const projectRouter = express.Router()
 
 const project = require("../data/helpers/projectModel.js")
+// const action = require("../data/helpers/actionModel.js")
 
 //GET 
 projectRouter.get("/:id", (req,res) => {
@@ -63,5 +64,23 @@ projectRouter.delete("/:id", (req,res) => {
               res.status(500).json({ errorMessage: "Error processing DELETE specified project" })
             })
 })
+
+//GET list of actions for a specific project 
+projectRouter.get("/:id/actions", (req,res) => {
+    project.getProjectActions(req.params.id)
+    .then(actions => {
+        if(actions) {
+            res.status(200).json(actions)
+        } else {
+            res.status(404).json({ message: "List of actions not found" })
+        }
+    })
+    .catch(error => {
+        console.log("Error getting list of actions for specified project ", error)
+        res.status(500).json({ errorMessage: "Error processing GET list of actions for specified project" })
+    }) 
+})
+
+
 
 module.exports = projectRouter
