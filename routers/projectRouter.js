@@ -33,6 +33,20 @@ projectRouter.post("/", (req, res) => {
 })
 
 //PUT
+projectRouter.put("/:id", (req,res) => {
+    project.update(req.params.id, req.body)
+        .then(proj => {
+      if(proj) {
+        res.status(200).json(proj)
+      } else {
+        res.status(404).json({ message: "The project could not be updated" })
+      }  
+    }) 
+    .catch(error => {
+      console.log("Error updating project ", error)
+      res.status(500).json({ errorMessage: "Error processing PUT project update" })
+    })
+})
 
 //DELETE
 
