@@ -21,7 +21,16 @@ projectRouter.get("/:id", (req,res) => {
 })
 
 //POST
-
+projectRouter.post("/", (req, res) => {
+    project.insert(req.body)
+    .then(proj => {
+              res.status(201).json(proj)
+            })
+            .catch(error => {
+              console.log("Error adding project ", error)
+              res.status(500).json({ errorMessage: "Error processing POST a new project" })
+            })        
+})
 
 //PUT
 
