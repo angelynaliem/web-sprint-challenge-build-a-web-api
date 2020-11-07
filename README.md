@@ -75,7 +75,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 - Express routers are like mini Express application used to organize our code better. They exist inside of an Express application.
 
 5. Describe tooling used to manually test the correctness of an API.
-- Postman is a tool used to test our API. We can make HTTP calls and modify request headers for instance.
+- Postman is a tool used to test our API. We can make HTTP calls and modify request headers for instance.no
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
