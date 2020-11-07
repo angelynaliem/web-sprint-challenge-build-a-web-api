@@ -32,11 +32,37 @@ actionRouter.post("/", (req, res) => {
             })        
 })
 
-
 //PUT
-
+actionRouter.put("/:id", (req,res) => {
+    action.update(req.params.id, req.body)
+        .then(act => {
+      if(act) {
+        res.status(200).json(act)
+      } else {
+        res.status(404).json({ message: "The action could not be updated" })
+      }  
+    }) 
+    .catch(error => {
+      console.log("Error updating project ", error)
+      res.status(500).json({ errorMessage: "Error processing PUT action update" })
+    })
+})
 
 //DELETE
+actionRouter.delete("/:id", (req,res) => {
+    action.remove(req.params.id)
+    .then(count => {
+        if(count > 0) {
+                    res.status(200).json({ message: "The action has been deleted ", removedAction: req.params.id }) //How to add the details of item being removed? Add Req.body variable?
+                  } else {
+                    res.status(404).json({ message: "The action cannot be deleted" })
+                  }
+    })
+    .catch(error => {
+              console.log("Error deleting specified action ", error)
+              res.status(500).json({ errorMessage: "Error processing DELETE specified action" })
+            })
+})
 
 
 module.exports = actionRouter
